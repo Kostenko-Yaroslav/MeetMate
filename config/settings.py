@@ -36,6 +36,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'huey.contrib.djhuey',
     'users.apps.UsersConfig',
     'schedule.apps.ScheduleConfig',
     'django.contrib.admin',
@@ -95,6 +96,19 @@ DATABASES = {
 }
 
 
+HUEY = {
+    'huey_class': 'huey.RedisHuey',
+    'name': 'meet_mate',  # Любое имя проекта
+    'results': True,       # Хранить результаты выполнения задач
+    'immediate': False,    # Если True, задачи будут выполняться сразу (как обычные функции), удобно для тестов
+    'connection': {
+        'host': '127.0.0.1',
+        'port': 6379,
+        'db': 0,
+    },
+}
+
+
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
@@ -119,7 +133,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Kyiv'
 
 USE_I18N = True
 
