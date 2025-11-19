@@ -4,6 +4,9 @@ from datetime import datetime
 from schedule.models import Lesson
 import webbrowser
 
+from bot.bot_instance import bot
+from users.models import Profile
+
 @periodic_task(crontab(minute='*/1'))
 def open_window():
 
@@ -11,7 +14,30 @@ def open_window():
 
     day_week = now.weekday()
 
-    lessons = Lesson.objects.filter(bell__time_start__hour=now.hour, bell__time_start__minute=now.minute, day_of_week=day_week)
+    lessons = Lesson.objects.select_related("user", "subject", "bell").filter(day_of_week=day_week)
 
-    for lesson in lessons:
-        webbrowser.open(lesson.subject.link)
+    lesson_start = lessons.filter(bell__time_start__hour=now.hour, bell__time_start__minute=now.minute)
+    lesson_end = lessons.filter(bell__time_end__hour=now.hour, bell__time_end__minute=now.minute)
+
+    def lesson_message(lesson, is_start):
+        try:
+            if hasattr(lesson.user, 'profile' and lesson.user.profile.chat_id):
+                pass
+
+            chat_id = lesson.user.profile.chat_id
+
+            if is_start:
+                text = f'Пара: {lesson.subject.name} НАЧАЛАСЬ ! Link: {lesson.subject.link};'
+            else:
+                text = f'Пара: {lesson.subject.name} ЗАКОНЧИЛАСЬ ! Link: {lesson.subject.link};'
+
+            bot.send_message(chat_id, text)
+
+        except Exception as e:
+            print(e)
+
+    for lesson in lesson_start:
+        lesson_message(lesson, is_start=True)
+
+    for lesson in lesson_end:
+        lesson_message(lesson, is_start=False)

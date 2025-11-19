@@ -1,6 +1,11 @@
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.forms import ModelForm
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+
+from users.models import Profile
 
 
 def register(request):
@@ -38,3 +43,20 @@ def logout_view(request):
 
 def index(request):
     return render(request, 'users/index.html')
+
+
+class ProfileFrom(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['city']
+
+class ProfileCreate(CreateView):
+    model = Profile
+    form_class = ProfileFrom
+    template_name = 'users/profile.html'
+    success_url = reverse_lazy('users:profile')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+

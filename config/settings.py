@@ -37,6 +37,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'huey.contrib.djhuey',
+    'bot.apps.BotConfig',
     'users.apps.UsersConfig',
     'schedule.apps.ScheduleConfig',
     'django.contrib.admin',

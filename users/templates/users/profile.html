@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block main %}
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+        {% if user.profile.chat_id %}
+            пользователь зареган в тг
+            {% else %}
+            <h1>join к тг боту</h1>
+            <a href=" https://telegram.me/meeetmatebot?start={{ user.profile.unique_code }}">Подключить тг</a>
+            {% endif %}
+    {% else %}
+        <p>Welcome, new user. Please log in.</p>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %} <h1>Напишите свой город + создание токена</h1>
+        {{ form.as_p }}
+        <button type="submit">sub</button>
+    </form>
+
+
+{% endblock %}
