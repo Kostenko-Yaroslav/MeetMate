@@ -12,6 +12,11 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'city']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name in self.fields:
+            self.fields[field_name].help_text = None
+
     def save(self, commit=True):
         user = super().save(commit=True)
 

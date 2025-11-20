@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Home | MeetMate{% endblock %}
+
+{% block main %}
+<div style="text-align: center; padding: 4rem 0;">
+    {% if not request.user.is_authenticated %}
+
+        <h1 style="font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem;">
+            Your personal <br>
+            <span style="color: var(--primary-color);">caretaker</span>
+        </h1>
+
+        <p class="text-muted" style="font-size: 1.2rem; max-width: 600px; margin: 0 auto 3rem;">
+            MeetMate notifies you on Telegram.
+            No more missed opportunities.
+        </p>
+
+        <div style="display: flex; gap: 1rem; justify-content: center; max-width: 400px; margin: 0 auto;">
+            <a href="{% url 'users:register' %}" class="btn btn-accent">
+                Start for free
+            </a>
+            <a href="{% url 'users:login' %}" class="btn btn-outline">
+                Log in
+            </a>
+        </div>
+
+    {% else %}
+
+        <h1 style="margin-bottom: 0.5rem;">Hi, {{ user.username }}! 👋</h1>
+        <p class="text-muted">Your schedule control panel.</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem; text-align: left;">
+
+            <a href="{% url 'schedule:create' %}" class="card" style="text-decoration: none; color: inherit; transition: transform 0.2s; display: block;">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--primary-color);">📅</div>
+                <h3>My schedule</h3>
+                <p class="text-muted">Create subjects, calls, and set up lessons.</p>
+                <div style="margin-top: 1rem; color: var(--primary-color); font-weight: 600; font-size: 0.9rem;">
+                    Go to settings &rarr;
+                </div>
+            </a>
+
+            <a href="{% url 'users:profile' %}" class="card" style="text-decoration: none; color: inherit; transition: transform 0.2s; display: block;">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--accent-color);">⚙️</div>
+                <h3>Profile and Bot</h3>
+                <p class="text-muted">Connecting Telegram and city settings.</p>
+                <div style="margin-top: 1rem; color: var(--primary-color); font-weight: 600; font-size: 0.9rem;">
+                    Open profile &rarr;
+                </div>
+            </a>
+
+        </div>
+
+        <div style="margin-top: 4rem;">
+            <a href="{% url 'users:logout' %}" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; border-bottom: 1px dashed var(--text-secondary);">
+                Log out
+            </a>
+        </div>
+
+    {% endif %}
+</div>
+
+<style>
+    .card:hover {
+        transform: translateY(-5px);
+        border-color: var(--primary-color);
+    }
+</style>
+{% endblock %}

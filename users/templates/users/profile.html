@@ -3,15 +3,41 @@
 {% block title %}Profile{% endblock %}
 
 {% block main %}
-    {% if user.is_authenticated %}
-        <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+<div class="container-sm">
+
+    <div class="card" style="text-align: center;">
+
+        <h1 style="margin-bottom: 0.5rem;">{{ user.username }}</h1>
+
+        <p style="color: var(--text-secondary); margin-bottom: 0;">
+            Account settings
+        </p>
+
+        <div class="divider"></div>
+
         {% if user.profile.chat_id %}
-                Пользователь подключен к тг
+            <div class="badge-success">
+                ✅ Telegram connected
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1.5rem;">
+                The bot will send notifications about pairs here.
+            </p>
         {% else %}
-            <h1>join к тг боту</h1>
-            <a href=" https://telegram.me/meeetmatebot?start={{ user.profile.unique_code }}">Подключить тг</a>
+            <a href="https://telegram.me/meeetmatebot?start={{ user.profile.unique_code }}" target="_blank" class="badge-warning">
+                🔗 Connect Telegram
+            </a>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1.5rem;">
+                Press the button above so that the bot can send links.
+            </p>
         {% endif %}
-    {% else %}
-        <p>Welcome, new user. Please log in.</p>
-    {% endif %}
+
+    </div>
+
+    <div style="text-align: center; margin-top: 2rem;">
+        <a href="{% url 'users:logout' %}" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;">
+            Log out
+        </a>
+    </div>
+
+</div>
 {% endblock %}

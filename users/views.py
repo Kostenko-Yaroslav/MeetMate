@@ -14,7 +14,6 @@ class RegisterView(CreateView):
 
 class UserLoginView(LoginView):
     template_name = 'users/login.html'
-    success_url = reverse_lazy('users:profile')
 
 class UserProfileView(ListView):
     model = User
@@ -22,7 +21,7 @@ class UserProfileView(ListView):
 
 def logout_view(request):
     logout(request)
-    return redirect('users:register')
+    return redirect('core:index')
 
 def index(request):
     return render(request, 'users/index.html')

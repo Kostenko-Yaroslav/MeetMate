@@ -1,0 +1,342 @@
+:root {
+    --bg-color: #0F0F11;
+    --surface-color: #18181B;
+    --text-main: #FFFFFF;
+    --text-secondary: #9CA3AF;
+    --primary-color: #F97316;
+    --primary-hover: #EA580C;
+    --input-bg: #27272A;
+    --border-color: #3F3F46;
+    --radius-card: 24px;
+    --radius-btn: 9999px;
+    --shadow-card: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    --shadow-btn: 0 4px 14px 0 rgba(249, 115, 22, 0.39);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5;
+}
+
+header {
+    width: 100%;
+    padding: 1.5rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    z-index: 50;
+    background: transparent;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+    text-decoration: none;
+}
+
+.logo span {
+    color: var(--primary-color);
+}
+
+nav {
+    display: flex;
+    gap: 2rem;
+}
+
+nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: var(--text-main);
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 100px 20px 40px;
+}
+
+.container-sm {
+    width: 100%;
+    max-width: 420px;
+}
+
+.container-wide {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.card {
+    background-color: var(--surface-color);
+    padding: 40px;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-color);
+    width: 100%;
+    margin: 20px 0;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    width: 100%;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--text-main);
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="url"],
+input[type="number"],
+select {
+    width: 100%;
+    height: 50px;
+    padding: 0 16px;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--text-main);
+    font-size: 1rem;
+    transition: all 0.2s;
+    margin-bottom: 1.5rem;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
+}
+
+form p {
+    margin: 0;
+    width: 100%;
+}
+
+form ul:not(.errorlist) {
+    display: none !important;
+}
+
+.errorlist {
+    margin: 0 0 1.5rem 0;
+    padding: 1rem;
+    list-style: none;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 8px;
+    color: #EF4444;
+    font-size: 0.9rem;
+    font-weight: 500;
+    width: 100%;
+    text-align: left;
+}
+
+.errorlist li {
+    margin-bottom: 0.25rem;
+}
+
+.errorlist li:last-child {
+    margin-bottom: 0;
+}
+
+.btn, button[type="submit"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    border-radius: var(--radius-btn);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.1s, opacity 0.2s;
+    text-decoration: none;
+    border: none;
+    margin-top: 0.5rem;
+}
+
+button[type="submit"], .btn-accent {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: var(--shadow-btn);
+}
+
+button[type="submit"]:hover, .btn-accent:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-outline {
+    background-color: var(--input-bg);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+}
+
+.btn-outline:hover {
+    border-color: var(--text-secondary);
+    background-color: #3F3F46;
+}
+
+.btn:active, button[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+.landing-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.landing-buttons .btn {
+    width: 180px;
+    margin-top: 0;
+}
+
+.hero-title {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.hero-title span {
+    color: var(--primary-color);
+}
+
+.hero-text {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.form-footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+}
+
+.divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 2rem 0;
+    width: 100%;
+}
+
+.badge-success {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-color: rgba(16, 185, 129, 0.15);
+    color: #34D399;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.badge-warning {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-color: rgba(249, 115, 22, 0.15);
+    color: var(--primary-color);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.badge-warning:hover {
+    background-color: rgba(249, 115, 22, 0.25);
+}
+
+.helptext {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    .landing-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    .landing-buttons .btn {
+        width: 100%;
+    }
+    header {
+        padding: 1rem;
+    }
+    main {
+        padding: 80px 16px 20px;
+    }
+    .card {
+        padding: 24px;
+    }
+}

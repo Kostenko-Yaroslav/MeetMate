@@ -1,22 +1,42 @@
 {% extends 'base.html' %}
 
-{% block title %}Create_schedule{% endblock %}
+{% block title %}Schedule settings{% endblock %}
+
 {% block main %}
-    <form action="{% url 'schedule:create_subject' %}" method="post">
-        {% csrf_token %} <h1>Create Subj</h1>
-        {{ subject_form.as_p }}
-        <button type="submit">sub</button>
-    </form>
-    <hr>
-    <form action="{% url 'schedule:create_bell' %}" method="post">
-        {% csrf_token %} <h1>Create Bell</h1>
-        {{ bell_form.as_p }}
-        <button type="submit">sub</button>
-    </form>
-    <hr>
-    <form action="{% url 'schedule:create_lesson' %}" method="post">
-    {% csrf_token %} <h1>Create schedule</h1>
-    {{ lesson_form.as_p }}
-    <button type="submit">sub</button>
-    </form>
+<div class="container-sm">
+    <h1 class="text-center">Schedule builder</h1>
+    <p class="text-center text-muted" style="margin-bottom: 3rem;">
+        Add subjects and calls once, then create your timetable.
+    </p>
+
+    <div class="card">
+        <h2>📘 New subject</h2>
+        <p class="text-muted">For example: ‘Mathematics’ and a link to Google Meet.</p>
+        <form action="{% url 'schedule:create_subject' %}" method="post">
+            {% csrf_token %}
+            {{ subject_form.as_p }}
+            <button type="submit" class="btn-outline">Add subject</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>⏰ Bell</h2>
+        <p class="text-muted">Start and end times of the pair.</p>
+        <form action="{% url 'schedule:create_bell' %}" method="post">
+            {% csrf_token %}
+            {{ bell_form.as_p }}
+            <button type="submit" class="btn-outline">Add call time</button>
+        </form>
+    </div>
+
+    <div class="card" style="border-color: var(--primary-color); box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.1);">
+        <h2 style="color: var(--primary-color);">📅 Create a lesson</h2>
+        <p class="text-muted">Match the object, time, and day of the week.</p>
+        <form action="{% url 'schedule:create_lesson' %}" method="post">
+            {% csrf_token %}
+            {{ lesson_form.as_p }}
+            <button type="submit" class="btn-accent">Save to schedule</button>
+        </form>
+    </div>
+</div>
 {% endblock %}
