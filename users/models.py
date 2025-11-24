@@ -12,3 +12,4 @@ class Profile(models.Model):
     unique_code = models.CharField(max_length=10, default=generate_unique_code, null=True, blank=True)
     telegram_id = models.CharField(max_length=20, null=True, blank=True)
     chat_id = models.CharField(max_length=50, null=True, blank=True)
+    repeats = models.IntegerField(default=1)

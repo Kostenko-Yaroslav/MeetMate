@@ -7,10 +7,11 @@ from users.models import Profile
 
 class UserRegisterForm(UserCreationForm):
     city = forms.CharField(max_length=100)
+    repeats = forms.IntegerField()
 
     class Meta:
         model = User
-        fields = ['username', 'city']
+        fields = ['username', 'city', 'repeats']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -21,9 +22,10 @@ class UserRegisterForm(UserCreationForm):
         user = super().save(commit=True)
 
         city_data = self.cleaned_data['city']
+        repeats_data = self.cleaned_data['repeats']
 
         token = get_random_string(length=10)
 
-        Profile.objects.create(user=user, city=city_data, unique_code=token)
+        Profile.objects.create(user=user, city=city_data, repeats=repeats_data, unique_code=token)
 
         return user

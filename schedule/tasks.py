@@ -2,10 +2,9 @@ from huey.contrib.djhuey import periodic_task
 from huey import crontab
 from datetime import datetime
 from schedule.models import Lesson
-import webbrowser
-
+import time
 from bot.bot_instance import bot
-from users.models import Profile
+
 
 @periodic_task(crontab(minute='*/1'))
 def open_window():
@@ -30,8 +29,11 @@ def open_window():
                 text = f'Пара: {lesson.subject.name} НАЧАЛАСЬ ! Link: {lesson.subject.link};'
             else:
                 text = f'Пара: {lesson.subject.name} ЗАКОНЧИЛАСЬ ! Link: {lesson.subject.link};'
+            profile = lesson.user.profile.repeats
 
-            bot.send_message(chat_id, text)
+            for _ in range(profile):
+                bot.send_message(chat_id, text)
+                time.sleep(1)
 
         except Exception as e:
             print(e)
